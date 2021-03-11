@@ -1,4 +1,6 @@
 ﻿ using System;
+ using _AppCadastroSeries.Classes.OtherFunctions;
+ using _AppCadastroSeries.Enums;
 
 namespace _AppCadastroSeries
 {
@@ -15,6 +17,9 @@ namespace _AppCadastroSeries
                    switch(option)
                     {
                         case "1":
+                        Functions func = new Functions();
+                        func.Show();
+
                         break;
                         
                         case "2":
