@@ -1,4 +1,5 @@
 ﻿ using System;
+  using _AppCadastroSeries.Classes;
  using _AppCadastroSeries.Classes.OtherFunctions;
  using _AppCadastroSeries.Enums;
 
@@ -17,11 +18,9 @@ namespace _AppCadastroSeries
                    switch(option)
                     {
                         case "1":
-                        Functions func = new Functions();
-                        func.Show();
-
+                        Catalog.CreateTitle();
                         break;
-                        
+
                         case "2":
                         break;
                         
@@ -29,6 +28,9 @@ namespace _AppCadastroSeries
                         break;
                         
                         case "4":
+                        break;
+
+                        case "X":
                         break;
                         
                         default:
@@ -41,6 +43,8 @@ namespace _AppCadastroSeries
                     Console.WriteLine("Informe uma opção valida!");
                     option = ChooseOption();
                 }
+
+                option = ChooseOption();
             }
             Console.WriteLine("Obrigado por utilizar o Dio Stream!");
         }

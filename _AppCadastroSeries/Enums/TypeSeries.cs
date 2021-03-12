@@ -15,6 +15,6 @@ namespace _AppCadastroSeries.Enums
         Infantis = 10,
         Romanticos = 11,
         Suspense = 12,
-        Terror = 13,
+        Terror = 13
     }
 }

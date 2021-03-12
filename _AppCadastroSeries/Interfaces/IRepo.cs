@@ -4,7 +4,7 @@ namespace _AppCadastroSeries.Interfaces
 {
     public interface IRepo
     {
-        object Create();
+        string[] Create();
         List<object> List();
 
         void Update();
