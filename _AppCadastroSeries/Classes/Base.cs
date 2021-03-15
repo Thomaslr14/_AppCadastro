@@ -46,19 +46,6 @@ namespace _AppCadastroSeries.Classes
                 arr[2] = Console.ReadLine();
                 Console.WriteLine("Informe o Ano de lançamento:");
                 arr[3] = Console.ReadLine();
-
-                // do
-                // {
-                //     if (!(contains = (bool).KeepSeries.Exists(x => x.Id == j)))
-                //     {
-                //         arr[0] = Convert.ToString(j);
-                //         break;
-                //     } else 
-                //     {
-                //         j++;
-                //     }
-                // } while(contains);
-
             }
             catch (ArgumentException)
             {

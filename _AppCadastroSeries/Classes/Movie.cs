@@ -6,7 +6,7 @@ using _AppCadastroSeries.Classes.OtherFunctions;
 
 namespace _AppCadastroSeries.Classes
 {
-    public class Movie 
+    public class Movie : Base
     {
         private TypeMovies _Genero {get;set;}
 
@@ -17,6 +17,14 @@ namespace _AppCadastroSeries.Classes
         }
         
         
+        public Movie(int Identifier, Types TypeOfTitle, TypeMovies Gen, string Title, string Year)
+        {
+            Id = Identifier;
+            Types = TypeOfTitle;
+            Genero = Gen;
+            Titulo = Title;
+            Ano = Year;
+        }
     }
 }
 

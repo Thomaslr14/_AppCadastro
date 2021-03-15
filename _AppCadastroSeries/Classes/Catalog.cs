@@ -1,26 +1,26 @@
 using _AppCadastroSeries.Classes.Repositories;
+using _AppCadastroSeries.Enums;
 
 namespace _AppCadastroSeries.Classes
 {
     public class Catalog : Base
     {
         
-        
         public static void CreateTitle()
         {
-            string[] received = new string[5];
-
             Catalog catalog = new Catalog();
+            string[] received = new string[5];
             received = catalog.Create();
             
-            RepositoryMovies repositoryMovies = new RepositoryMovies();
-            if (Enums.Types.Movie.Equals(received[0]))
+            if (Enums.Types.Movie.ToString() == received[0])
             {
+                RepositoryMovies repositoryMovies = new RepositoryMovies();
                 repositoryMovies.AddToList(received);
             }
-            else if(Enums.Types.Serie.Equals(received[0]))
+            else if(Enums.Types.Serie.ToString() == received[0])
             {
-                
+                RepositorySeries repositorySeries = new RepositorySeries();
+                repositorySeries.AddToList(received);
             }
                 
         }

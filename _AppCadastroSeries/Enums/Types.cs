@@ -2,7 +2,7 @@ namespace _AppCadastroSeries.Enums
 {
     public enum Types
     {
-        Movie,
-        Serie
+        Movie = 0,
+        Serie = 1
     }
 }
