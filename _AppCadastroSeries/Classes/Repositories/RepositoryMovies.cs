@@ -14,15 +14,14 @@ namespace _AppCadastroSeries.Classes.Repositories
         {
             int _Id = 0;
             ReturnId(ref _Id);
-            AddBase<TypeMovies>(param, _Id);
             
-
+            KeepMovies.Add((Movie)AddBase(param, _Id));
         }
 
-        public static void ReturnId(ref int id)
+        private void ReturnId(ref int id)
         {
-            if (Convert.ToInt32(KeepMovies) <= 0)
-                id = 0;
+            if (KeepMovies.Count == 0)
+                return;
             else
                 id = KeepMovies.Count;
 

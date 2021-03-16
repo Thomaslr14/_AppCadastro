@@ -1,5 +1,5 @@
+using System;
 using _AppCadastroSeries.Classes.Repositories;
-using _AppCadastroSeries.Enums;
 
 namespace _AppCadastroSeries.Classes
 {
@@ -9,7 +9,7 @@ namespace _AppCadastroSeries.Classes
         public static void CreateTitle()
         {
             Catalog catalog = new Catalog();
-            string[] received = new string[5];
+            string[] received = new string[4];
             received = catalog.Create();
             
             if (Enums.Types.Movie.ToString() == received[0])
@@ -22,7 +22,17 @@ namespace _AppCadastroSeries.Classes
                 RepositorySeries repositorySeries = new RepositorySeries();
                 repositorySeries.AddToList(received);
             }
-                
+        }
+
+        public static void ListTitles()
+        {
+            Console.WriteLine("------------------");
+            Console.WriteLine("LISTAR TITULOS:");
+            Console.WriteLine("------------------\n");
+            Console.WriteLine("1 - SERIE\n2- FILMES");
+            var ctrl = Convert.ToInt32(Console.ReadLine());
+            Catalog catalog = new Catalog();
+            catalog.List(ctrl);
         }
     }
 }

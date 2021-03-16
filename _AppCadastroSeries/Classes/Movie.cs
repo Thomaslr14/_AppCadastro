@@ -11,8 +11,6 @@ namespace _AppCadastroSeries.Classes
             get {return _Genero;}
             set { _Genero = value;}
         }
-        
-        
         public Movie(int Identifier, Types TypeOfTitle, 
         TypeMovies Gen, string Title, string Year)
         {

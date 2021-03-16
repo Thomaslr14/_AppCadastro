@@ -22,6 +22,7 @@ namespace _AppCadastroSeries
                         break;
 
                         case "2":
+                        Catalog.ListTitles();
                         break;
                         
                         case "3":

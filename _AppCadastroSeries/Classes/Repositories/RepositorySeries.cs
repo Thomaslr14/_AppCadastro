@@ -8,23 +8,17 @@ namespace _AppCadastroSeries.Classes.Repositories
     public class RepositorySeries : RepositoryBase, IPattern
     {
         public static List<Serie> KeepSeries = new List<Serie>();
-        Serie ss = new Serie();
-
+        
         public void AddToList(string[] param)
         {
-            int id = 0;
-            ReturnId(ref id);
-            AddBase<TypeSeries>(param, id);
+            int _Id = 0;
+            ReturnId(ref _Id);
+            AddBase(param, _Id);
             
-            
-            KeepSeries.Add(ss);
-            
-
+            KeepSeries.Add((Serie)AddBase(param, _Id));
         }
 
-        
-
-        public static void ReturnId(ref int id)
+        private void ReturnId(ref int id)
         {
             if (KeepSeries.Count == 0)
                 return;

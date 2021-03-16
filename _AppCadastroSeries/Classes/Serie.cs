@@ -11,7 +11,15 @@ namespace _AppCadastroSeries.Classes
             get { return _Genero;}
             set { _Genero = value;}
         }
-
+        public Serie(int Identifier, Types TypeOfTitle, 
+        TypeSeries Gen, string Title, string Year)
+        {
+            Id = Identifier;
+            Types = TypeOfTitle;
+            Genero = Gen;
+            Titulo = Title;
+            Ano = Year;
+        }   
 
 
     }
