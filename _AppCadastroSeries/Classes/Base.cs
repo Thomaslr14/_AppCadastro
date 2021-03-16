@@ -1,8 +1,8 @@
 using System;
-using System.Collections.Generic;
 using _AppCadastroSeries.Interfaces;
 using _AppCadastroSeries.Enums;
 using _AppCadastroSeries.Classes.OtherFunctions;
+using _AppCadastroSeries.Classes.Repositories;
 
 namespace _AppCadastroSeries.Classes
 {
@@ -13,13 +13,11 @@ namespace _AppCadastroSeries.Classes
         protected string Ano {get;set;}
         protected Types Types {get;set;}
         public void Delete() {}
-        public List<object> List() {return null;}
         public void Update(){}
 
         public string[] Create()
         {
             string[] arr = new string[4];
-            Serie s = new Serie();
             bool control = false;
             string type;
             Console.Clear();
@@ -92,6 +90,36 @@ namespace _AppCadastroSeries.Classes
             }
             
             return arr;
+        }
+        public void List(int ctrl)
+        {
+            try 
+            {
+                switch(ctrl)
+                {
+                    case 1:
+                        foreach(var item in RepositorySeries.KeepSeries)
+                        {
+                            Console.WriteLine($"#{item.Id} - {item.Types} - GENERO: {item.Genero} - TITULO: {item.Titulo} - DATA DE LANÇAMENTO: {item.Ano}");
+                        }
+                    break;
+                    case 2:
+                        foreach(var item in RepositoryMovies.KeepMovies)
+                        {
+                            Console.WriteLine($"#{item.Id} - {item.Types} - GENERO: {item.Genero} - TITULO: {item.Titulo} - DATA DE LANÇAMENTO: {item.Ano}");
+                        }
+                    break;
+                    
+                    default:
+                        throw new ArgumentOutOfRangeException();        
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("Informe uma opção valida!");
+                return;
+            }
+            
         }
     }
 }
