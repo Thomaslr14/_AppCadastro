@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using _AppCadastroSeries.Classes;
 using _AppCadastroSeries.Enums;
 
 namespace _AppCadastroSeries.Classes.OtherFunctions
@@ -13,6 +11,26 @@ namespace _AppCadastroSeries.Classes.OtherFunctions
             {   
                 Console.WriteLine($"{Convert.ToInt32(series)} - {series}");
             }
+        }
+
+        public static bool CheckGen<TEnum>(string i)
+        {
+            foreach (var series in Enum.GetValues(typeof(TEnum)))
+            {
+                if (Convert.ToInt32(i) == Convert.ToInt32(series))
+                    return true;
+                    
+            }
+            return false;   
+        }
+
+        public static void Exit()
+        {
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("Até mais jovem Padawan!");
+            Console.WriteLine("Que a força esteja com você!");
+            Console.WriteLine("------------------------------");
+            Environment.Exit(0);
         }
     }
 }

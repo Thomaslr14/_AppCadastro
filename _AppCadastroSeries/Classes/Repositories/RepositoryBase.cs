@@ -13,6 +13,9 @@ namespace _AppCadastroSeries.Classes.Repositories
             T _TypeOfGen = (T) Enum.Parse(typeof(T),param[1]);
             string _Title = param[2];
             string _Year = param[3];
+
+            
+
         }
     }
 }

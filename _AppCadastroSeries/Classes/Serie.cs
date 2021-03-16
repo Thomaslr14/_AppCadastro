@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using _AppCadastroSeries.Enums;
-using _AppCadastroSeries.Interfaces;
 
 namespace _AppCadastroSeries.Classes
 {

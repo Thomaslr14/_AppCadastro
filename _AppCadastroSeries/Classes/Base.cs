@@ -20,28 +20,67 @@ namespace _AppCadastroSeries.Classes
         {
             string[] arr = new string[4];
             Serie s = new Serie();
-
-            try 
+            bool control = false;
+            string type;
+            Console.Clear();
+            try
             {
-                Console.Clear();
-                Console.WriteLine("#####################");
+                do
+                {
+                Console.WriteLine("----------------------");
                 Console.WriteLine("ADICIONAR NOVO TITULO:");
-                Console.WriteLine("#####################\n");
+                Console.WriteLine("----------------------\n");
                 Console.WriteLine("Qual o tipo do Titulo?");
                 Console.WriteLine("1 - SERIE\n2 - FILME");
-                var type = Convert.ToInt32(Console.ReadLine());
-                    if (type == 1) 
-                    {
-                        arr[0] = Convert.ToString(Enums.Types.Serie);
-                        Functions.ShowEnums<TypeSeries>();
-                    }   
-                    else if (type == 2)
-                    {
-                        arr[0] = Convert.ToString(Enums.Types.Movie);
-                        Functions.ShowEnums<TypeMovies>();
+                type = Console.ReadLine();
+                    try 
+                    {   
+                        switch (type)
+                        {
+                            case "1":
+                                Console.WriteLine("####### Gêneros #######");
+                                arr[0] = Convert.ToString(Enums.Types.Serie);
+                                Functions.ShowEnums<TypeSeries>();
+                                control = true;
+                            break;
+
+                            case "2":
+                                Console.WriteLine("####### Gêneros #######");
+                                arr[0] = Convert.ToString(Enums.Types.Movie);
+                                Functions.ShowEnums<TypeMovies>();
+                                control = true;
+                            break;
+
+                            default:
+                                throw new ArgumentException();
+                            
+                        }
                     }
-                Console.WriteLine("\nInforme o Genero:");
-                arr[1] = Console.ReadLine();
+                    catch(ArgumentException)
+                    {
+                        Console.WriteLine("Informe uma opção valida!\n");
+                    }
+                    
+                } while (!control);
+                
+                
+                bool ctrl = false;
+                while (!ctrl)
+                {
+                    Console.WriteLine("\nInforme o Genero:");
+                    var temp = Console.ReadLine();  
+                    if (type == "1")
+                    {
+                        ctrl = Functions.CheckGen<TypeSeries>(temp);
+                        if (ctrl) {arr[1] = temp;} else { Console.WriteLine("Informe um Gênero valido!");}
+                    }
+                    else if (type == "2")
+                    {
+                        ctrl = Functions.CheckGen<TypeMovies>(temp);
+                        if (ctrl) {arr[1] = temp;} else { Console.WriteLine("Informe um Gênero valido!");}
+                    }
+                }
+                
                 Console.WriteLine("Informe o nome do Titulo:");
                 arr[2] = Console.ReadLine();
                 Console.WriteLine("Informe o Ano de lançamento:");

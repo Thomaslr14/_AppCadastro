@@ -1,7 +1,6 @@
-﻿ using System;
-  using _AppCadastroSeries.Classes;
- using _AppCadastroSeries.Classes.OtherFunctions;
- using _AppCadastroSeries.Enums;
+﻿using System;
+using _AppCadastroSeries.Classes;
+using _AppCadastroSeries.Classes.OtherFunctions;
 
 namespace _AppCadastroSeries
 {
@@ -9,6 +8,7 @@ namespace _AppCadastroSeries
     {
         static void Main(string[] args)
         {
+            Console.Clear();
             var option = ChooseOption();
             
             while (option.ToUpper() != "X")
@@ -29,9 +29,6 @@ namespace _AppCadastroSeries
                         
                         case "4":
                         break;
-
-                        case "X":
-                        break;
                         
                         default:
                             throw new ArgumentNullException();
@@ -46,14 +43,14 @@ namespace _AppCadastroSeries
 
                 option = ChooseOption();
             }
-            Console.WriteLine("Obrigado por utilizar o Dio Stream!");
+            Functions.Exit();
         }
 
         static string ChooseOption()
         {
             Console.WriteLine("Bem vindo ao DIO Stream!");
-            Console.WriteLine("1 - Listar séries");
-            Console.WriteLine("2 - Inserir série");
+            Console.WriteLine("1 - Inserir série");
+            Console.WriteLine("2 - Listar séries");
             Console.WriteLine("3 - Atualizar série");
             Console.WriteLine("4 - Excluir série");
             Console.WriteLine("X - SAIR");
