@@ -26,6 +26,7 @@ namespace _AppCadastroSeries
                         break;
                         
                         case "3":
+                        Catalog.DeleteTitle();
                         break;
                         
                         case "4":
