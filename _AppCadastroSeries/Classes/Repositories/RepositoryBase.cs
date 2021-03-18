@@ -28,5 +28,10 @@ namespace _AppCadastroSeries.Classes.Repositories
                 throw new Exception();
             }
         }
+    
+        protected static void DelBase()
+        {
+            
+        }
     }
 }

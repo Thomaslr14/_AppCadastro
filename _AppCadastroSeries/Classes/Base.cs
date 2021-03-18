@@ -12,7 +12,30 @@ namespace _AppCadastroSeries.Classes
         protected string Titulo {get;set;}
         protected string Ano {get;set;}
         protected Types Types {get;set;}
-        public void Delete() {}
+        public void Delete() 
+        {
+            Console.Clear();
+            Console.WriteLine("-----------------");
+            Console.WriteLine("EXCLUIR TITULOS:");
+            Console.WriteLine("-----------------\n");
+            Console.WriteLine("1 - SERIES\n2 - FILMES");
+            var ctrl = Convert.ToInt32(Console.ReadLine());
+            List(ctrl);
+            Console.WriteLine("\nInforme o Id do titulo que deseja excluir:");
+            var IdTitle = Console.ReadLine();
+            switch(ctrl)
+            {
+                case 1:
+                    RepositorySeries repositorySerie = new RepositorySeries();
+                    repositorySerie.DelFromList();
+                break;
+
+                case 2:
+                    RepositoryMovies repositoryMovie = new RepositoryMovies();
+                    repositoryMovie.DelFromList();
+                break;
+            }
+        }
         public void Update(){}
 
         public string[] Create()
@@ -72,12 +95,12 @@ namespace _AppCadastroSeries.Classes
                     if (type == "1")
                     {
                         control = Functions.CheckGen<TypeSeries>(temp);
-                        if (control) {arr[1] = temp;} else { Console.WriteLine("Informe um Gênero valido!");}
+                        if (control) {arr[1] = temp;} else { Functions.WriteError("Informe um Gênero valido!\n");}
                     }
                     else if (type == "2")
                     {
                         control = Functions.CheckGen<TypeMovies>(temp);
-                        if (control) {arr[1] = temp;} else { Console.WriteLine("Informe um Gênero valido!");}
+                        if (control) {arr[1] = temp;} else { Functions.WriteError("Informe um Gênero valido!\n");}
                     }
                 }
                 
@@ -88,11 +111,12 @@ namespace _AppCadastroSeries.Classes
             }
             catch (ArgumentNullException)
             {
-                Console.WriteLine("Informe uma opção valida!");
+            Functions.WriteError("Informe uma opção valida!");
             }
             
             return arr;
         }
+
         public void List(int ctrl)
         {
             try 
@@ -100,18 +124,18 @@ namespace _AppCadastroSeries.Classes
                 switch(ctrl)
                 {
                     case 1:
-                        foreach(var item in RepositorySeries.KeepSeries)
-                        {
-                            Console.WriteLine("");
-                            Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
-                        }
+                        Console.WriteLine("--------------------------------------------- SERIES ---------------------------------------------\n");
+                            foreach(var item in RepositorySeries.KeepSeries)
+                            {
+                                Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
+                            }
                     break;
                     case 2:
-                        foreach(var item in RepositoryMovies.KeepMovies)
-                        {
-                            Console.WriteLine("");
-                            Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
-                        }
+                        Console.WriteLine("--------------------------------------------- FILMES ---------------------------------------------\n");
+                            foreach(var item in RepositoryMovies.KeepMovies)
+                            {
+                                Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
+                            }
                     break;
                     
                     default:

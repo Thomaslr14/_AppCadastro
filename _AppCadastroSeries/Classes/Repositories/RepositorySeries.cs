@@ -28,6 +28,10 @@ namespace _AppCadastroSeries.Classes.Repositories
 
             
         }
+        public void DelFromList()
+        {
+            DelBase();
+        }
 
         private void ReturnId(ref int id)
         {

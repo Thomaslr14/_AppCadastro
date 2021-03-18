@@ -7,8 +7,7 @@ namespace _AppCadastroSeries.Classes.Repositories
 {
     public class RepositoryMovies : RepositoryBase, IPattern
     {
-        public static List<Movie> KeepMovies = new List<Movie>();
-        
+        public static List<Movie> KeepMovies = new List<Movie>();        
 
         public void AddToList(string[] param)
         {
@@ -28,6 +27,10 @@ namespace _AppCadastroSeries.Classes.Repositories
             
         }
 
+        public void DelFromList()
+        {
+
+        }
         private void ReturnId(ref int id)
         {
             if (KeepMovies.Count == 0)
