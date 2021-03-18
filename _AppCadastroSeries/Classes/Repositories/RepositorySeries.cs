@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using _AppCadastroSeries.Enums;
+using _AppCadastroSeries.Classes.OtherFunctions;
 using _AppCadastroSeries.Interfaces;
 using System;
 
@@ -15,7 +15,18 @@ namespace _AppCadastroSeries.Classes.Repositories
             ReturnId(ref _Id);
             AddBase(param, _Id);
             
-            KeepSeries.Add((Serie)AddBase(param, _Id));
+            try
+            {
+                KeepSeries.Add((Serie)AddBase(param, _Id));
+                Console.WriteLine("\nTitulo cadastrado com sucesso!\n");
+                Console.WriteLine("--------------------------------");
+            }
+            catch (Exception)
+            {
+                Functions.WriteError("\nErro ao cadastrar novo titulo!\n");
+            }
+
+            
         }
 
         private void ReturnId(ref int id)

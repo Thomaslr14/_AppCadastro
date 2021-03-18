@@ -38,7 +38,7 @@ namespace _AppCadastroSeries
                 }
                 catch (ArgumentNullException)
                 {
-                    Console.WriteLine("Informe uma opção valida!");
+                    Functions.WriteError("Informe uma opção valida!\n");
                     option = ChooseOption();
                 }
 
@@ -55,7 +55,7 @@ namespace _AppCadastroSeries
             Console.WriteLine("3 - Atualizar série");
             Console.WriteLine("4 - Excluir série");
             Console.WriteLine("X - SAIR");
-            Console.WriteLine("Escolha a opção desejada");
+            Console.WriteLine("Escolha a opção desejada:");
             string opt = Console.ReadLine();
             return opt;
         }

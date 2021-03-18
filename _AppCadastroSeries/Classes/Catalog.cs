@@ -26,10 +26,11 @@ namespace _AppCadastroSeries.Classes
 
         public static void ListTitles()
         {
+            Console.Clear();
             Console.WriteLine("------------------");
             Console.WriteLine("LISTAR TITULOS:");
             Console.WriteLine("------------------\n");
-            Console.WriteLine("1 - SERIE\n2- FILMES");
+            Console.WriteLine("1 - SERIES\n2 - FILMES");
             var ctrl = Convert.ToInt32(Console.ReadLine());
             Catalog catalog = new Catalog();
             catalog.List(ctrl);

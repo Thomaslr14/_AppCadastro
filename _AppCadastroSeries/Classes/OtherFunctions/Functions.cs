@@ -32,5 +32,12 @@ namespace _AppCadastroSeries.Classes.OtherFunctions
             Console.WriteLine("------------------------------");
             Environment.Exit(0);
         }
+
+        public static void WriteError(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(msg);
+            Console.ResetColor();
+        }
     }
 }

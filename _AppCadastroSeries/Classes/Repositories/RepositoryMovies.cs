@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using _AppCadastroSeries.Enums;
+using _AppCadastroSeries.Classes.OtherFunctions;
 using _AppCadastroSeries.Interfaces;
 
 namespace _AppCadastroSeries.Classes.Repositories
@@ -14,8 +14,18 @@ namespace _AppCadastroSeries.Classes.Repositories
         {
             int _Id = 0;
             ReturnId(ref _Id);
+            try
+            {
+                KeepMovies.Add((Movie)AddBase(param, _Id));
+                Console.WriteLine("\nTitulo cadastrado com sucesso!\n");
+                Console.WriteLine("--------------------------------");
+            }
+            catch (Exception)
+            {
+                Functions.WriteError("\nErro ao cadastrar novo titulo!\n");
+            }
+        
             
-            KeepMovies.Add((Movie)AddBase(param, _Id));
         }
 
         private void ReturnId(ref int id)

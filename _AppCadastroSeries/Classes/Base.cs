@@ -36,46 +36,48 @@ namespace _AppCadastroSeries.Classes
                         switch (type)
                         {
                             case "1":
-                                Console.WriteLine("####### Gêneros #######");
+                                Console.WriteLine("\nGêneros");
+                                Console.WriteLine("-------\n");
                                 arr[0] = Convert.ToString(Enums.Types.Serie);
                                 Functions.ShowEnums<TypeSeries>();
                                 control = true;
                             break;
 
                             case "2":
-                                Console.WriteLine("####### Gêneros #######");
+                                Console.WriteLine("\nGêneros");
+                                Console.WriteLine("-------\n");
                                 arr[0] = Convert.ToString(Enums.Types.Movie);
                                 Functions.ShowEnums<TypeMovies>();
                                 control = true;
                             break;
 
                             default:
-                                throw new ArgumentException();
+                                throw new ArgumentNullException();
                             
                         }
                     }
-                    catch(ArgumentException)
+                    catch(ArgumentNullException)
                     {
-                        Console.WriteLine("Informe uma opção valida!\n");
+                        Functions.WriteError("Informe uma opção valida!\n");
                     }
                     
                 } while (!control);
                 
                 
-                bool ctrl = false;
-                while (!ctrl)
+                control = false;
+                while (!control)
                 {
-                    Console.WriteLine("\nInforme o Genero:");
+                    Console.WriteLine("Informe o Genero:");
                     var temp = Console.ReadLine();  
                     if (type == "1")
                     {
-                        ctrl = Functions.CheckGen<TypeSeries>(temp);
-                        if (ctrl) {arr[1] = temp;} else { Console.WriteLine("Informe um Gênero valido!");}
+                        control = Functions.CheckGen<TypeSeries>(temp);
+                        if (control) {arr[1] = temp;} else { Console.WriteLine("Informe um Gênero valido!");}
                     }
                     else if (type == "2")
                     {
-                        ctrl = Functions.CheckGen<TypeMovies>(temp);
-                        if (ctrl) {arr[1] = temp;} else { Console.WriteLine("Informe um Gênero valido!");}
+                        control = Functions.CheckGen<TypeMovies>(temp);
+                        if (control) {arr[1] = temp;} else { Console.WriteLine("Informe um Gênero valido!");}
                     }
                 }
                 
@@ -84,7 +86,7 @@ namespace _AppCadastroSeries.Classes
                 Console.WriteLine("Informe o Ano de lançamento:");
                 arr[3] = Console.ReadLine();
             }
-            catch (ArgumentException)
+            catch (ArgumentNullException)
             {
                 Console.WriteLine("Informe uma opção valida!");
             }
@@ -100,13 +102,15 @@ namespace _AppCadastroSeries.Classes
                     case 1:
                         foreach(var item in RepositorySeries.KeepSeries)
                         {
-                            Console.WriteLine($"#{item.Id} - {item.Types} - GENERO: {item.Genero} - TITULO: {item.Titulo} - DATA DE LANÇAMENTO: {item.Ano}");
+                            Console.WriteLine("");
+                            Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
                         }
                     break;
                     case 2:
                         foreach(var item in RepositoryMovies.KeepMovies)
                         {
-                            Console.WriteLine($"#{item.Id} - {item.Types} - GENERO: {item.Genero} - TITULO: {item.Titulo} - DATA DE LANÇAMENTO: {item.Ano}");
+                            Console.WriteLine("");
+                            Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
                         }
                     break;
                     
@@ -116,7 +120,7 @@ namespace _AppCadastroSeries.Classes
             }
             catch (ArgumentOutOfRangeException)
             {
-                Console.WriteLine("Informe uma opção valida!");
+                Functions.WriteError("Informe uma opção valida!");
                 return;
             }
             
