@@ -28,9 +28,9 @@ namespace _AppCadastroSeries.Classes.Repositories
 
             
         }
-        public void DelFromList()
+        public void DelFromList(int IdTitle)
         {
-            DelBase();
+            DelBase(ref IdTitle);
         }
 
         private void ReturnId(ref int id)

@@ -9,7 +9,7 @@ namespace _AppCadastroSeries.Classes
     public abstract class Base : IRepo
     {
         public int Id {get; protected set;}
-        protected string Titulo {get;set;}
+        public string Titulo {get; protected set;}
         protected string Ano {get;set;}
         protected Types Types {get;set;}
         public void Delete() 
@@ -27,12 +27,12 @@ namespace _AppCadastroSeries.Classes
             {
                 case 1:
                     RepositorySeries repositorySerie = new RepositorySeries();
-                    repositorySerie.DelFromList();
+                    repositorySerie.DelFromList(Convert.ToInt32(IdTitle));
                 break;
 
                 case 2:
                     RepositoryMovies repositoryMovie = new RepositoryMovies();
-                    repositoryMovie.DelFromList();
+                    repositoryMovie.DelFromList(Convert.ToInt32(IdTitle));
                 break;
             }
         }

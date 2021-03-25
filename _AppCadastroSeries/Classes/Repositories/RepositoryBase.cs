@@ -29,9 +29,12 @@ namespace _AppCadastroSeries.Classes.Repositories
             }
         }
     
-        protected static void DelBase()
+        protected static void DelBase(ref int IdTitle)
         {
+            // Verificar se existe essa Id
+
             
+
         }
     }
 }

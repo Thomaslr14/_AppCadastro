@@ -51,10 +51,10 @@ namespace _AppCadastroSeries
         static string ChooseOption()
         {
             Console.WriteLine("Bem vindo ao DIO Stream!");
-            Console.WriteLine("1 - Inserir série");
-            Console.WriteLine("2 - Listar séries");
-            Console.WriteLine("3 - Atualizar série");
-            Console.WriteLine("4 - Excluir série");
+            Console.WriteLine("1 - Inserir novo título");
+            Console.WriteLine("2 - Listar títulos");
+            Console.WriteLine("3 - Excluir título");
+            Console.WriteLine("4 - Atualizar título");
             Console.WriteLine("X - SAIR");
             Console.WriteLine("Escolha a opção desejada:");
             string opt = Console.ReadLine();

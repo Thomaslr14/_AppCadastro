@@ -27,9 +27,18 @@ namespace _AppCadastroSeries.Classes.Repositories
             
         }
 
-        public void DelFromList()
+        public void DelFromList(int IdTitle)
         {
-
+            foreach (var item in KeepMovies)
+            {
+                if (item.Id == IdTitle)
+                {
+                    KeepMovies.Remove(item);
+                    Console.WriteLine($" O Titulo '#{item.Id} - {item.Titulo}' foi excluido!");
+                    break;
+                }
+            }
+            Functions.WriteError("O Id informado não existe!");
         }
         private void ReturnId(ref int id)
         {
