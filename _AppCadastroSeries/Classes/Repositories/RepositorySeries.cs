@@ -42,6 +42,11 @@ namespace _AppCadastroSeries.Classes.Repositories
             }
             
         }
+        
+        public void UpdateFromList()
+        {
+            
+        }        
         private void ReturnId(ref int id)
         {
             if (KeepSeries.Count == 0)

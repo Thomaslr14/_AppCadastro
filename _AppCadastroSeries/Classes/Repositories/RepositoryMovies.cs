@@ -39,6 +39,11 @@ namespace _AppCadastroSeries.Classes.Repositories
             }
             
         }
+        
+        public void UpdateFromList()
+        {
+            
+        } 
         private void ReturnId(ref int id)
         {
             if (KeepMovies.Count == 0)

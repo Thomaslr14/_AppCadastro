@@ -42,7 +42,22 @@ namespace _AppCadastroSeries.Classes
                 break;
             }
         }
-        public void Update(){}
+        public int[] Update()
+        {
+            Console.Clear();
+            Console.WriteLine("-----------------");
+            Console.WriteLine("ATUALIZAR TITULOS:");
+            Console.WriteLine("-----------------\n");
+            Console.WriteLine("1 - SERIES\n2 - FILMES");
+            var opt = Console.ReadLine();
+            List(Convert.ToInt32(opt));
+            Console.WriteLine("Selecione um título para atualizar:");
+            var id = Console.ReadLine();
+            int[] arrInt = new int[2];
+            arrInt[0] = Convert.ToInt32(opt);
+            arrInt[1] = Convert.ToInt32(id);
+            return arrInt;
+        }
         public string[] Create()
         {
             string[] arr = new string[4];
@@ -141,28 +156,45 @@ namespace _AppCadastroSeries.Classes
         {
             try 
             {
-                switch(ctrl)
+                if (ctrl == 1)
                 {
-                    case 1:
+                    if (RepositorySeries.KeepSeries.Capacity == 0)
+                    {
+                        Console.WriteLine("Nenhuma serie cadastrada!\n");
+                    }
+                    else 
+                    {
                         Console.WriteLine("--------------------------------------------- SERIES ---------------------------------------------\n");
-                            foreach(var item in RepositorySeries.KeepSeries)
-                            {
-                                if  (item.Excluded == false)
-                                    Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
-                            }
-                    break;
-                    case 2:
-                        Console.WriteLine("--------------------------------------------- FILMES ---------------------------------------------\n");
-                            foreach(var item in RepositoryMovies.KeepMovies)
-                            {
-                                if  (item.Excluded == false)
-                                    Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
-                            }
-                    break;
+                        foreach(var item in RepositorySeries.KeepSeries)
+                        {
+                            if  (item.Excluded == false)
+                                Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
+                        }
+                        Console.WriteLine("--------------------------------------------------------------------------------------------------\n");
+                    }
                     
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                }
+                else if (ctrl == 2)
+                {
+                    if (RepositoryMovies.KeepMovies.Capacity == 0)
+                    {
+                        Console.WriteLine("Nenhuma filme cadastrado!\n");
+                    }
+                    else 
+                    {
+                        Console.WriteLine("--------------------------------------------- FILMES ---------------------------------------------\n");
+                        foreach(var item in RepositoryMovies.KeepMovies)
+                        {
+                            if  (item.Excluded == false)
+                                Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
+                        }
+                        Console.WriteLine("--------------------------------------------------------------------------------------------------\n");
+                    }
 
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException();
                 }
             }
             catch (ArgumentOutOfRangeException)

@@ -4,6 +4,7 @@ namespace _AppCadastroSeries.Interfaces
     {
         void AddToList(string[] param);
         void DelFromList(int IdTitle);
+        void UpdateFromList();
         
     }
 }

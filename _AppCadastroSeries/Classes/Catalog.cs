@@ -6,7 +6,6 @@ namespace _AppCadastroSeries.Classes
 {
     public class Catalog : Base
     {
-        
         public static void CreateTitle()
         {
             Catalog catalog = new Catalog();
@@ -46,6 +45,34 @@ namespace _AppCadastroSeries.Classes
         {
             Catalog catalog = new Catalog();
             catalog.Delete();
+        }
+        public static void UpdateTitle()
+        {
+            Catalog catalog = new Catalog();
+            int[] param = new int[2];
+            param = catalog.Update();
+            if (param[0] == 1)
+            {
+                RepositorySeries repositorySeries = new RepositorySeries();
+                bool cond = RepositorySeries.KeepSeries.Find(x => x.Id == param[1]).Excluded;
+                if (!cond)
+                {
+                    // verdadeira
+                }
+                else 
+                {
+                    Functions.WriteError("");
+                }
+            }
+            else if (param[0] == 2)
+            {
+                RepositoryMovies repositoryMovies = new RepositoryMovies();
+            }
+            else 
+            {
+
+            }
+            
         }
         
     }

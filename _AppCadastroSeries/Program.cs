@@ -30,6 +30,7 @@ namespace _AppCadastroSeries
                         break;
                         
                         case "4":
+                        Catalog.UpdateTitle();
                         break;
                         
                         default:

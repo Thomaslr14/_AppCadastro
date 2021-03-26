@@ -6,7 +6,7 @@ namespace _AppCadastroSeries.Interfaces
     {
         string[] Create();
         void List(int ctrl);
-        void Update();
+        int[] Update();
         void Delete();
     }
 }
