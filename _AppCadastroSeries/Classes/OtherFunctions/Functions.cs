@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using _AppCadastroSeries.Enums;
 
 namespace _AppCadastroSeries.Classes.OtherFunctions
@@ -16,10 +17,9 @@ namespace _AppCadastroSeries.Classes.OtherFunctions
         public static bool CheckGen<TEnum>(string i)
         {
             foreach (var series in Enum.GetValues(typeof(TEnum)))
-            {
+            {   
                 if (Convert.ToInt32(i) == Convert.ToInt32(series))
-                    return true;
-                    
+                return true;
             }
             return false;   
         }
@@ -39,5 +39,17 @@ namespace _AppCadastroSeries.Classes.OtherFunctions
             Console.WriteLine(msg);
             Console.ResetColor();
         }
+    
+        public static bool CheckYear(string year)
+        {
+            var pattern = @"^(19|20)\d{2}$"; 
+            Regex regex = new Regex(pattern);
+            if (regex.IsMatch(year))
+            {
+                return true;
+            }
+            return false;
+        }
+    
     }
 }

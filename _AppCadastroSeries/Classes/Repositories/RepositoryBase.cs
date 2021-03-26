@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 using _AppCadastroSeries.Enums;
 
 namespace _AppCadastroSeries.Classes.Repositories
 {   
-    public class RepositoryBase
-    {        
+    public class RepositoryBase 
+    {
         protected static object AddBase(string[] param, int id)
         {
             int _id = id;
@@ -29,12 +30,5 @@ namespace _AppCadastroSeries.Classes.Repositories
             }
         }
     
-        protected static void DelBase(ref int IdTitle)
-        {
-            // Verificar se existe essa Id
-
-            
-
-        }
     }
 }

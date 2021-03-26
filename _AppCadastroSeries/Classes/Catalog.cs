@@ -1,5 +1,6 @@
 using System;
 using _AppCadastroSeries.Classes.Repositories;
+using _AppCadastroSeries.Classes.OtherFunctions;
 
 namespace _AppCadastroSeries.Classes
 {
@@ -30,9 +31,16 @@ namespace _AppCadastroSeries.Classes
             Console.WriteLine("LISTAR TITULOS:");
             Console.WriteLine("-----------------\n");
             Console.WriteLine("1 - SERIES\n2 - FILMES");
-            var ctrl = Convert.ToInt32(Console.ReadLine());
-            Catalog catalog = new Catalog();
-            catalog.List(ctrl);
+            try
+            {
+                var ctrl = Convert.ToInt32(Console.ReadLine());
+                Catalog catalog = new Catalog();
+                catalog.List(ctrl);
+            }
+            catch (FormatException)
+            {
+                Functions.WriteError("Informe uma opção valida!\n");
+            }
         }
         public static void DeleteTitle()
         {

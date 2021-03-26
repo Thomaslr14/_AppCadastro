@@ -10,12 +10,12 @@ namespace _AppCadastroSeries
         {
             Console.Clear();
             var option = ChooseOption();
-            
+           
             while (option.ToUpper() != "X")
             {
                 try 
                 {
-                   switch(option)
+                    switch(option)
                     {
                         case "1":
                         Catalog.CreateTitle();
@@ -35,14 +35,11 @@ namespace _AppCadastroSeries
                         default:
                             throw new ArgumentNullException();
                     }
-                
                 }
                 catch (ArgumentNullException)
                 {
                     Functions.WriteError("Informe uma opção valida!\n");
-                    option = ChooseOption();
                 }
-
                 option = ChooseOption();
             }
             Functions.Exit();

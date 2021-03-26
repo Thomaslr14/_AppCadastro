@@ -8,10 +8,16 @@ namespace _AppCadastroSeries.Classes
 {
     public abstract class Base : IRepo
     {
-        public int Id {get; protected set;}
-        public string Titulo {get; protected set;}
+        public int Id { get; protected set;}
+        public string Titulo { get; protected set;}
         protected string Ano {get;set;}
         protected Types Types {get;set;}
+        private bool _Excluded {get;set;}
+        public bool Excluded 
+        {
+            get { return _Excluded;}
+            set { _Excluded = value;}
+        }
         public void Delete() 
         {
             Console.Clear();
@@ -37,7 +43,6 @@ namespace _AppCadastroSeries.Classes
             }
         }
         public void Update(){}
-
         public string[] Create()
         {
             string[] arr = new string[4];
@@ -90,33 +95,48 @@ namespace _AppCadastroSeries.Classes
                 control = false;
                 while (!control)
                 {
-                    Console.WriteLine("Informe o Genero:");
-                    var temp = Console.ReadLine();  
-                    if (type == "1")
+                    try
                     {
-                        control = Functions.CheckGen<TypeSeries>(temp);
-                        if (control) {arr[1] = temp;} else { Functions.WriteError("Informe um Gênero valido!\n");}
-                    }
-                    else if (type == "2")
+                        Console.WriteLine("Informe o Genero:");
+                        var temp = Console.ReadLine();  
+                        if (type == "1")
+                        {
+                            control = Functions.CheckGen<TypeSeries>(temp);
+                            if (control) {arr[1] = temp;} else { throw new FormatException();}
+                        }
+                        else if (type == "2")
+                        {
+                            control = Functions.CheckGen<TypeMovies>(temp);
+                            if (control) {arr[1] = temp;} else { throw new FormatException();}
+                        }
+                    } 
+                    catch (FormatException)
                     {
-                        control = Functions.CheckGen<TypeMovies>(temp);
-                        if (control) {arr[1] = temp;} else { Functions.WriteError("Informe um Gênero valido!\n");}
+                        Functions.WriteError("Informe um gênero valido!\n");
                     }
+                    
                 }
-                
                 Console.WriteLine("Informe o nome do Titulo:");
                 arr[2] = Console.ReadLine();
-                Console.WriteLine("Informe o Ano de lançamento:");
-                arr[3] = Console.ReadLine();
+
+                while (arr[3] == null)
+                {
+                    Console.WriteLine("Informe o Ano de lançamento:");
+                    var year = Console.ReadLine();
+                    if (Functions.CheckYear(year))
+                        arr[3] = year;
+                    else
+                        Functions.WriteError("Informe um ano valido!\n");
+
+                }
             }
             catch (ArgumentNullException)
             {
-            Functions.WriteError("Informe uma opção valida!");
+                Functions.WriteError("Informe uma opção valida!\n");
             }
             
             return arr;
         }
-
         public void List(int ctrl)
         {
             try 
@@ -127,24 +147,27 @@ namespace _AppCadastroSeries.Classes
                         Console.WriteLine("--------------------------------------------- SERIES ---------------------------------------------\n");
                             foreach(var item in RepositorySeries.KeepSeries)
                             {
-                                Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
+                                if  (item.Excluded == false)
+                                    Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
                             }
                     break;
                     case 2:
                         Console.WriteLine("--------------------------------------------- FILMES ---------------------------------------------\n");
                             foreach(var item in RepositoryMovies.KeepMovies)
                             {
-                                Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
+                                if  (item.Excluded == false)
+                                    Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
                             }
                     break;
                     
                     default:
-                        throw new ArgumentOutOfRangeException();        
+                        throw new ArgumentOutOfRangeException();
+
                 }
             }
             catch (ArgumentOutOfRangeException)
             {
-                Functions.WriteError("Informe uma opção valida!");
+                Functions.WriteError("Informe uma opção valida!\n");
                 return;
             }
             
