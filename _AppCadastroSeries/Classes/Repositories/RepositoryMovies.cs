@@ -23,22 +23,21 @@ namespace _AppCadastroSeries.Classes.Repositories
             {
                 Functions.WriteError("\nErro ao cadastrar novo titulo!\n");
             }
-        
             
         }
-
         public void DelFromList(int IdTitle)
         {
-            foreach (var item in KeepMovies)
-            {
-                if (item.Id == IdTitle)
-                {
-                    KeepMovies.Remove(item);
-                    Console.WriteLine($" O Titulo '#{item.Id} - {item.Titulo}' foi excluido!");
-                    break;
-                }
+            
+            if (KeepMovies.Exists(x => x.Id == IdTitle))
+            {   
+                Console.WriteLine($"O Titulo '#{IdTitle} - {KeepMovies[IdTitle].Titulo}' foi excluido!\n");
+                KeepMovies[IdTitle].Excluded = true;
             }
-            Functions.WriteError("O Id informado não existe!");
+            else
+            {
+                Functions.WriteError("O Id informado não existe!\n");
+            }
+            
         }
         private void ReturnId(ref int id)
         {

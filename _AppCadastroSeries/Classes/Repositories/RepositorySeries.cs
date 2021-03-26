@@ -14,7 +14,6 @@ namespace _AppCadastroSeries.Classes.Repositories
             int _Id = 0;
             ReturnId(ref _Id);
             AddBase(param, _Id);
-            
             try
             {
                 KeepSeries.Add((Serie)AddBase(param, _Id));
@@ -30,9 +29,19 @@ namespace _AppCadastroSeries.Classes.Repositories
         }
         public void DelFromList(int IdTitle)
         {
-            DelBase(ref IdTitle);
+            
+            if (KeepSeries.Exists(x => x.Id == IdTitle))
+            {
+                
+                Console.WriteLine($"O Titulo '#{IdTitle} - {KeepSeries[IdTitle].Titulo}' foi excluido!\n");
+                KeepSeries[IdTitle].Excluded = true;
+            }
+            else
+            {
+                Functions.WriteError("O Id informado não existe!\n");
+            }
+            
         }
-
         private void ReturnId(ref int id)
         {
             if (KeepSeries.Count == 0)
