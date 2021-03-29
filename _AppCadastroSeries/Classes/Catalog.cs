@@ -54,12 +54,12 @@ namespace _AppCadastroSeries.Classes
             param = catalog.Update();
             var SelectedType = param[0];
             var SelectedId = param[1];
-            if (SelectedId == 1)
+            if (SelectedType == 1)
             {
                 RepositorySeries repositorySeries = new RepositorySeries();
                 repositorySeries.UpdateFromList(SelectedId);
             }
-            else if (SelectedId == 2)
+            else if (SelectedType == 2)
             {
                 RepositoryMovies repositoryMovies = new RepositoryMovies();
                 repositoryMovies.UpdateFromList(SelectedId);
