@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _AppCadastroSeries.Classes.OtherFunctions;
+using _AppCadastroSeries.Enums;
 using _AppCadastroSeries.Interfaces;
 
 namespace _AppCadastroSeries.Classes.Repositories
@@ -42,7 +43,12 @@ namespace _AppCadastroSeries.Classes.Repositories
         
         public void UpdateFromList()
         {
-            
+            var newTypeTitle = "";
+            var newGenTitle = "";
+            var newNameTitle = "";
+            var newYearTitle = "";
+            UpdateBase(ref newTypeTitle, ref newGenTitle,
+                        ref newNameTitle, ref newYearTitle);
         } 
         private void ReturnId(ref int id)
         {

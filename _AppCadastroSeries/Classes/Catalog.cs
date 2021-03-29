@@ -54,19 +54,21 @@ namespace _AppCadastroSeries.Classes
             if (param[0] == 1)
             {
                 RepositorySeries repositorySeries = new RepositorySeries();
+                repositorySeries.UpdateFromList();
                 bool cond = RepositorySeries.KeepSeries.Find(x => x.Id == param[1]).Excluded;
                 if (!cond)
                 {
-                    // verdadeira
+                    
                 }
                 else 
                 {
-                    Functions.WriteError("");
+                    Functions.WriteError("Id não existe!\n");
                 }
             }
             else if (param[0] == 2)
             {
                 RepositoryMovies repositoryMovies = new RepositoryMovies();
+                repositoryMovies.UpdateFromList();
             }
             else 
             {

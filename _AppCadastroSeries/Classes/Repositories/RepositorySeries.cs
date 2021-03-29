@@ -45,7 +45,12 @@ namespace _AppCadastroSeries.Classes.Repositories
         
         public void UpdateFromList()
         {
-            
+            var newTypeTitle = "";
+            var newGenTitle = "";
+            var newNameTitle = "";
+            var newYearTitle = "";
+            UpdateBase(ref newTypeTitle, ref newGenTitle,
+                        ref newNameTitle, ref newYearTitle);
         }        
         private void ReturnId(ref int id)
         {
