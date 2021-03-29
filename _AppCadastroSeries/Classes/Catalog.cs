@@ -50,25 +50,19 @@ namespace _AppCadastroSeries.Classes
         {
             Catalog catalog = new Catalog();
             int[] param = new int[2];
+
             param = catalog.Update();
-            if (param[0] == 1)
+            var SelectedType = param[0];
+            var SelectedId = param[1];
+            if (SelectedId == 1)
             {
                 RepositorySeries repositorySeries = new RepositorySeries();
-                repositorySeries.UpdateFromList();
-                bool cond = RepositorySeries.KeepSeries.Find(x => x.Id == param[1]).Excluded;
-                if (!cond)
-                {
-                    
-                }
-                else 
-                {
-                    Functions.WriteError("Id não existe!\n");
-                }
+                repositorySeries.UpdateFromList(SelectedId);
             }
-            else if (param[0] == 2)
+            else if (SelectedId == 2)
             {
                 RepositoryMovies repositoryMovies = new RepositoryMovies();
-                repositoryMovies.UpdateFromList();
+                repositoryMovies.UpdateFromList(SelectedId);
             }
             else 
             {

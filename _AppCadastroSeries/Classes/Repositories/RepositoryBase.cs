@@ -38,6 +38,7 @@ namespace _AppCadastroSeries.Classes.Repositories
             string option;
             do
             {
+                Console.WriteLine("");
                 Console.WriteLine("-------------------");
                 Console.WriteLine("ATUALIZANDO TITULO");
                 Console.WriteLine("-------------------");

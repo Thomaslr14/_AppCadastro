@@ -10,8 +10,8 @@ namespace _AppCadastroSeries.Classes
     {
         public int Id { get; protected set;}
         public string Titulo { get; protected set;}
-        protected string Ano {get;set;}
-        protected Types Types {get;set;}
+        public string Ano {get; protected set;}
+        public Types Types {get; protected set;}
         private bool _Excluded {get;set;}
         public bool Excluded 
         {

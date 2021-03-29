@@ -43,7 +43,7 @@ namespace _AppCadastroSeries.Classes.Repositories
             
         }
         
-        public void UpdateFromList()
+        public void UpdateFromList(int SelectedId)
         {
             var newTypeTitle = "";
             var newGenTitle = "";
