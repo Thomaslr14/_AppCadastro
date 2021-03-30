@@ -6,6 +6,7 @@ namespace _AppCadastroSeries.Classes.Repositories
 {   
     public class RepositoryBase 
     {
+        protected static bool PassInformation = false;
         protected static object AddBase(string[] param, int id)
         {
             int _id = id;
@@ -30,8 +31,8 @@ namespace _AppCadastroSeries.Classes.Repositories
             }
         }
 
-        protected static void UpdateBase(ref string newTypeTitle,
-                                        ref string newGenTitle,
+        protected static void UpdateBase(ref Types newTypeTitle,
+                                        ref Enum newGenTitle,
                                         ref string newNameTitle,
                                         ref string newYearTitle)
         {
@@ -46,47 +47,48 @@ namespace _AppCadastroSeries.Classes.Repositories
                 Console.WriteLine("2 - GENERO");
                 Console.WriteLine("3 - NOME DO TITULO");
                 Console.WriteLine("4 - DATA DE LANÇAMENTO");
+                Console.WriteLine("S - SALVAR");
                 Console.WriteLine("X - SAIR");
                 Console.WriteLine("Informe o que deseja atualizar:");
                 option = Console.ReadLine();
                 try
                 {
-                    switch(option)
+                    switch(option.ToUpper())
                     {
                     case "1":
-                        Console.WriteLine("NOVO TIPO:");
+                        Console.WriteLine("\nNOVO TIPO:");
                         Console.WriteLine("---------");
                         Console.WriteLine("1 - SERIE");
                         Console.WriteLine("2 - FILME");
                         var temp = Console.ReadLine();
                         if (temp == "1" || temp == "2")
-                            newTypeTitle = temp;
+                            newTypeTitle = (Types) Enum.Parse(typeof(Types), temp);
                         else
                             throw new ArgumentNullException();
                     break;
 
                     case "2":
                        
-                        if (newTypeTitle == "1")
+                        if (Convert.ToInt32(newTypeTitle) == 1)
                         {
-                            Console.WriteLine("NOVO GENERO:");
+                            Console.WriteLine("\nNOVO GENERO:");
                             Console.WriteLine("---------");
                             Functions.ShowEnums<TypeSeries>();
                             var tmp = Console.ReadLine();
                             if(Functions.CheckGen<TypeSeries>(tmp))
-                                newGenTitle = tmp;
+                                newGenTitle = (TypeSeries) Enum.Parse(typeof(TypeSeries), tmp);
                             else
                                 throw new ArgumentOutOfRangeException();
 
                         }
-                        else if (newTypeTitle == "2")
+                        else if (Convert.ToInt32(newTypeTitle) == 2)
                         {
-                            Console.WriteLine("NOVO GENERO:");
+                            Console.WriteLine("\nNOVO GENERO:");
                             Console.WriteLine("---------");
                             Functions.ShowEnums<TypeMovies>();  
                             var tmp = Console.ReadLine();
                             if(Functions.CheckGen<TypeMovies>(tmp))
-                                newGenTitle = tmp;
+                                newGenTitle = (TypeMovies) Enum.Parse(typeof(TypeMovies), tmp);
                             else
                                 throw new ArgumentOutOfRangeException(); 
 
@@ -94,17 +96,17 @@ namespace _AppCadastroSeries.Classes.Repositories
                     break;
 
                     case "3":
-                        Console.WriteLine("NOVO NOME:");
+                        Console.WriteLine("\nNOVO NOME:");
                         Console.WriteLine("---------");
                         temp = Console.ReadLine();
                         if (!string.IsNullOrEmpty(temp))
-                            newTypeTitle = temp;
+                            newNameTitle = temp;
                         else
                             throw new ArgumentNullException();
                     break;
 
                     case "4":
-                        Console.WriteLine("NOVA DATA DE LANÇAMENTO:");
+                        Console.WriteLine("\nNOVA DATA DE LANÇAMENTO:");
                         Console.WriteLine("---------");
                         temp = Console.ReadLine();
                         if (Functions.CheckYear(temp))
@@ -112,6 +114,11 @@ namespace _AppCadastroSeries.Classes.Repositories
                         else
                             throw new ArgumentNullException();
                     break;
+
+                    case "S":
+                        PassInformation = true;
+                        return;
+                    
 
                     default:
                     break;

@@ -50,7 +50,6 @@ namespace _AppCadastroSeries.Classes
         {
             Catalog catalog = new Catalog();
             int[] param = new int[2];
-
             param = catalog.Update();
             var SelectedType = param[0];
             var SelectedId = param[1];

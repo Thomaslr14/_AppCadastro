@@ -1,4 +1,5 @@
 using _AppCadastroSeries.Enums;
+using System;
 
 namespace _AppCadastroSeries.Classes
 {
@@ -6,17 +7,17 @@ namespace _AppCadastroSeries.Classes
     {
         private TypeSeries _Genero {get;set;}
 
-        public TypeSeries Genero 
+        public Enum Genero 
         {
             get { return _Genero;}
-            set { _Genero = value;}
+            set { _Genero = (TypeSeries)value;}
         }
         public Serie(int Identifier, Types TypeOfTitle, 
-        TypeSeries Gen, string Title, string Year)
+        Enum Gen, string Title, string Year)
         {
             Id = Identifier;
             Types = TypeOfTitle;
-            Genero = Gen;
+            Genero = (TypeSeries)Gen;
             Titulo = Title;
             Ano = Year;
         }   

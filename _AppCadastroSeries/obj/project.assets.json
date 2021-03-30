@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DEVELOPMENT\\Git\\_AppCadastro\\_AppCadastroSeries\\_AppCadastroSeries.csproj",
+      "projectUniqueName": "C:\\Development\\Git\\_AppCadastro\\_AppCadastroSeries\\_AppCadastroSeries.csproj",
       "projectName": "_AppCadastroSeries",
-      "projectPath": "C:\\DEVELOPMENT\\Git\\_AppCadastro\\_AppCadastroSeries\\_AppCadastroSeries.csproj",
+      "projectPath": "C:\\Development\\Git\\_AppCadastro\\_AppCadastroSeries\\_AppCadastroSeries.csproj",
       "packagesPath": "C:\\Users\\thomas.rodrigues\\.nuget\\packages\\",
-      "outputPath": "C:\\DEVELOPMENT\\Git\\_AppCadastro\\_AppCadastroSeries\\obj\\",
+      "outputPath": "C:\\Development\\Git\\_AppCadastro\\_AppCadastroSeries\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -65,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

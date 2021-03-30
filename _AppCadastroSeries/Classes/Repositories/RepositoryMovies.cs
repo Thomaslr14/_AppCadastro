@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using _AppCadastroSeries.Classes.OtherFunctions;
 using _AppCadastroSeries.Enums;
 using _AppCadastroSeries.Interfaces;
@@ -43,23 +44,30 @@ namespace _AppCadastroSeries.Classes.Repositories
         
         public void UpdateFromList(int SelectedId)
         {
-            var newTypeTitle = KeepMovies.Find(x => x.Id == SelectedId).Types.ToString();
-            var newGenTitle = KeepMovies.Find(x => x.Id == SelectedId).Genero.ToString();
+            Types newTypeTitle = KeepMovies.Find(x => x.Id == SelectedId).Types;
+            Enum newGenTitle = KeepMovies.Find(x => x.Id == SelectedId).Genero;
             var newNameTitle = KeepMovies.Find(x => x.Id == SelectedId).Titulo;
             var newYearTitle = KeepMovies.Find(x => x.Id == SelectedId).Ano;
 
             UpdateBase(ref newTypeTitle, ref newGenTitle,
-                        ref newNameTitle, ref newYearTitle);
-            
-            var index = KeepMovies.Find(x => x.Id == SelectedId).ToString();
-            Movie updatedmovie = new Movie(SelectedId, (Types)Enum.Parse(typeof(Types), newGenTitle), 
-                                            (TypeMovies)Enum.Parse(typeof(TypeMovies), newGenTitle), 
-                                            newNameTitle, newYearTitle); 
-
-            KeepMovies.Insert(Convert.ToInt32(index), updatedmovie);
-
+                        ref newNameTitle, ref newYearTitle);    
 
             
+            if (PassInformation)
+            {                    
+                var ctrlMovie = KeepMovies.FirstOrDefault(x => x.Id == SelectedId);
+                ctrlMovie.Genero = newGenTitle;
+                ctrlMovie.Titulo = newNameTitle;
+                ctrlMovie.Ano = newYearTitle;
+                ctrlMovie.Types = newTypeTitle;
+
+
+                
+            }
+            else
+            {
+                Functions.WriteError("DEu ruim!");
+            }           
 
         } 
 
