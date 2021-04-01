@@ -1,7 +1,10 @@
+using System;
+using System.Linq;
 using System.Collections.Generic;
 using _AppCadastroSeries.Classes.OtherFunctions;
 using _AppCadastroSeries.Interfaces;
-using System;
+using _AppCadastroSeries.Enums;
+
 
 namespace _AppCadastroSeries.Classes.Repositories
 {
@@ -45,12 +48,32 @@ namespace _AppCadastroSeries.Classes.Repositories
         
         public void UpdateFromList(int SelectedId)
         {
-            // var newTypeTitle = "";
-            // var newGenTitle = "";
-            // var newNameTitle = "";
-            // var newYearTitle = "";
-            // UpdateBase(ref newTypeTitle, ref newGenTitle,
-            //             ref newNameTitle, ref newYearTitle);
+            Types newTypeTitle = KeepSeries.Find(x => x.Id == SelectedId).Types;
+            Enum newGenTitle = KeepSeries.Find(x => x.Id == SelectedId).Genero;
+            var newNameTitle = KeepSeries.Find(x => x.Id == SelectedId).Titulo;
+            var newYearTitle = KeepSeries.Find(x => x.Id == SelectedId).Ano;
+
+            UpdateBase(ref newTypeTitle, ref newGenTitle,
+                        ref newNameTitle, ref newYearTitle);    
+
+            try 
+            {
+                if (PassInformation)
+                {
+                    var UpdateCtrl = KeepSeries.FirstOrDefault(x => x.Id == SelectedId);
+                    UpdateCtrl.Types = newTypeTitle;
+                    UpdateCtrl.Genero = newGenTitle;
+                    UpdateCtrl.Titulo = newNameTitle;
+                    UpdateCtrl.Ano = newYearTitle;
+                    System.Threading.Thread.Sleep(10);
+                    Console.WriteLine("\nTitulo atualizado com sucesso!");
+                    Console.WriteLine("------------------------------");
+                }
+            }
+            catch (ArgumentException)
+            {
+                Functions.WriteError("Erro ao atualizar titulo!\n");
+            }
         }        
         private void ReturnId(ref int id)
         {

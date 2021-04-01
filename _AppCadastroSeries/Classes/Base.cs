@@ -9,9 +9,9 @@ namespace _AppCadastroSeries.Classes
     public abstract class Base : IRepo
     {
         public int Id { get; protected set;}
-        public string Titulo { get; protected set;}
-        public string Ano {get; protected set;}
-        public Types Types {get; protected set;}
+        public string Titulo { get; set;}
+        public string Ano {get; set;}
+        public Types Types {get; set;}
         private bool _Excluded {get;set;}
         public bool Excluded 
         {

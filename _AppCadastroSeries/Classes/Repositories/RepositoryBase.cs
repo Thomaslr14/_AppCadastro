@@ -4,8 +4,10 @@ using _AppCadastroSeries.Enums;
 
 namespace _AppCadastroSeries.Classes.Repositories
 {   
-    public class RepositoryBase 
+    public class RepositoryBase : Base
     {
+
+
         protected static bool PassInformation = false;
         protected static object AddBase(string[] param, int id)
         {
@@ -121,7 +123,7 @@ namespace _AppCadastroSeries.Classes.Repositories
                     
 
                     default:
-                    break;
+                        throw new Exception();
                     }
 
                 }
@@ -133,10 +135,15 @@ namespace _AppCadastroSeries.Classes.Repositories
                 {
                     Functions.WriteError("Informe um gênero valido!\n");
                 }
+                catch (Exception)
+                {
+                    Functions.WriteError("Houve um erro ao processar a solicitação!\n");
+                }
                 
                 
             } while (option.ToUpper() != "X");
             
+
         }
     
     }

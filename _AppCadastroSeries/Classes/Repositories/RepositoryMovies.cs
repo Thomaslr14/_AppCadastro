@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using _AppCadastroSeries.Classes.OtherFunctions;
 using _AppCadastroSeries.Enums;
 using _AppCadastroSeries.Interfaces;
+using System.Linq;
 
 namespace _AppCadastroSeries.Classes.Repositories
 {
@@ -50,24 +50,26 @@ namespace _AppCadastroSeries.Classes.Repositories
             var newYearTitle = KeepMovies.Find(x => x.Id == SelectedId).Ano;
 
             UpdateBase(ref newTypeTitle, ref newGenTitle,
-                        ref newNameTitle, ref newYearTitle);    
+                        ref newNameTitle, ref newYearTitle); 
 
-            
-            if (PassInformation)
-            {                    
-                var ctrlMovie = KeepMovies.FirstOrDefault(x => x.Id == SelectedId);
-                ctrlMovie.Genero = newGenTitle;
-                ctrlMovie.Titulo = newNameTitle;
-                ctrlMovie.Ano = newYearTitle;
-                ctrlMovie.Types = newTypeTitle;
-
-
-                
-            }
-            else
+            try 
             {
-                Functions.WriteError("DEu ruim!");
-            }           
+                if (PassInformation)
+                {
+                    var UpdateCtrl = KeepMovies.FirstOrDefault(x => x.Id == SelectedId);
+                    UpdateCtrl.Types = newTypeTitle;
+                    UpdateCtrl.Genero = newGenTitle;
+                    UpdateCtrl.Titulo = newNameTitle;
+                    UpdateCtrl.Ano = newYearTitle;
+                    System.Threading.Thread.Sleep(10);
+                    Console.WriteLine("Titulo atualizado com sucesso!\n");
+                    Console.WriteLine("------------------------------");
+                }
+            }
+            catch (ArgumentException)
+            {
+                Functions.WriteError("Erro ao atualizar titulo!\n");
+            }
 
         } 
 

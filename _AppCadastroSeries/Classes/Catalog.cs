@@ -1,6 +1,8 @@
 using System;
 using _AppCadastroSeries.Classes.Repositories;
 using _AppCadastroSeries.Classes.OtherFunctions;
+using _AppCadastroSeries.Enums;
+
 
 namespace _AppCadastroSeries.Classes
 {
@@ -53,10 +55,13 @@ namespace _AppCadastroSeries.Classes
             param = catalog.Update();
             var SelectedType = param[0];
             var SelectedId = param[1];
+
             if (SelectedType == 1)
             {
                 RepositorySeries repositorySeries = new RepositorySeries();
                 repositorySeries.UpdateFromList(SelectedId);
+
+                
             }
             else if (SelectedType == 2)
             {
@@ -65,7 +70,7 @@ namespace _AppCadastroSeries.Classes
             }
             else 
             {
-
+                Functions.WriteError("Erro! O sistema não pôde encontrar a opção informada!");
             }
             
         }
