@@ -5,8 +5,8 @@ namespace _AppCadastroSeries.Interfaces
     public interface IRepo
     {
         string[] Create();
-        void List(int ctrl);
-        int[] Update();
+        bool List(int ctrl);
+        void Update(out int SelectedOption, out int SelectedId);
         void Delete();
     }
 }

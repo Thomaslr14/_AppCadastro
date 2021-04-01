@@ -9,7 +9,7 @@ namespace _AppCadastroSeries.Classes.Repositories
 
 
         protected static bool PassInformation = false;
-        protected static object AddBase(string[] param, int id)
+        protected object AddBase(string[] param, int id)
         {
             int _id = id;
             Types _TypeOfTitle = (Types)Types.Parse(typeof(Types), param[0]);
@@ -33,10 +33,9 @@ namespace _AppCadastroSeries.Classes.Repositories
             }
         }
 
-        protected static void UpdateBase(ref Types newTypeTitle,
-                                        ref Enum newGenTitle,
-                                        ref string newNameTitle,
-                                        ref string newYearTitle)
+        protected void UpdateBase(ref Enum newGenTitle,
+                                  ref string newNameTitle,
+                                  ref string newYearTitle)
         {
             string option;
             do
@@ -45,10 +44,9 @@ namespace _AppCadastroSeries.Classes.Repositories
                 Console.WriteLine("-------------------");
                 Console.WriteLine("ATUALIZANDO TITULO");
                 Console.WriteLine("-------------------");
-                Console.WriteLine("1 - TIPO");
-                Console.WriteLine("2 - GENERO");
-                Console.WriteLine("3 - NOME DO TITULO");
-                Console.WriteLine("4 - DATA DE LANÇAMENTO");
+                Console.WriteLine("1 - GENERO");
+                Console.WriteLine("2 - NOME DO TITULO");
+                Console.WriteLine("3 - ANO DE LANÇAMENTO");
                 Console.WriteLine("S - SALVAR");
                 Console.WriteLine("X - SAIR");
                 Console.WriteLine("Informe o que deseja atualizar:");
@@ -58,58 +56,46 @@ namespace _AppCadastroSeries.Classes.Repositories
                     switch(option.ToUpper())
                     {
                     case "1":
-                        Console.WriteLine("\nNOVO TIPO:");
-                        Console.WriteLine("---------");
-                        Console.WriteLine("1 - SERIE");
-                        Console.WriteLine("2 - FILME");
-                        var temp = Console.ReadLine();
-                        if (temp == "1" || temp == "2")
-                            newTypeTitle = (Types) Enum.Parse(typeof(Types), temp);
-                        else
-                            throw new ArgumentNullException();
-                    break;
-
-                    case "2":
-                       
-                        if (Convert.ToInt32(newTypeTitle) == 1)
+                        Console.WriteLine("\nNOVO GENERO:");
+                        Console.WriteLine("------------");
+                        if (newGenTitle.GetType().Name == "TypeSeries")
                         {
-                            Console.WriteLine("\nNOVO GENERO:");
-                            Console.WriteLine("---------");
                             Functions.ShowEnums<TypeSeries>();
+                            Console.WriteLine("Informe o novo gênero:");
                             var tmp = Console.ReadLine();
                             if(Functions.CheckGen<TypeSeries>(tmp))
                                 newGenTitle = (TypeSeries) Enum.Parse(typeof(TypeSeries), tmp);
                             else
                                 throw new ArgumentOutOfRangeException();
-
                         }
-                        else if (Convert.ToInt32(newTypeTitle) == 2)
+                        else if(newGenTitle.GetType().Name == "TypeMovies")
                         {
-                            Console.WriteLine("\nNOVO GENERO:");
-                            Console.WriteLine("---------");
-                            Functions.ShowEnums<TypeMovies>();  
+                            Functions.ShowEnums<TypeMovies>();
+                            Console.WriteLine("Informe o novo gênero:");
                             var tmp = Console.ReadLine();
                             if(Functions.CheckGen<TypeMovies>(tmp))
                                 newGenTitle = (TypeMovies) Enum.Parse(typeof(TypeMovies), tmp);
                             else
                                 throw new ArgumentOutOfRangeException(); 
-
                         }
+                        else
+                            throw new NullReferenceException(); 
+                            
                     break;
 
-                    case "3":
+                    case "2":
                         Console.WriteLine("\nNOVO NOME:");
-                        Console.WriteLine("---------");
-                        temp = Console.ReadLine();
+                        Console.WriteLine("------------");
+                        var temp = Console.ReadLine();
                         if (!string.IsNullOrEmpty(temp))
                             newNameTitle = temp;
                         else
                             throw new ArgumentNullException();
                     break;
 
-                    case "4":
-                        Console.WriteLine("\nNOVA DATA DE LANÇAMENTO:");
-                        Console.WriteLine("---------");
+                    case "3":
+                        Console.WriteLine("\nNOVO ANO DE LANÇAMENTO:");
+                        Console.WriteLine("------------");
                         temp = Console.ReadLine();
                         if (Functions.CheckYear(temp))
                             newYearTitle = temp;
@@ -120,6 +106,11 @@ namespace _AppCadastroSeries.Classes.Repositories
                     case "S":
                         PassInformation = true;
                         return;
+
+
+                    case "X":
+                        
+                    break;
                     
 
                     default:
@@ -135,6 +126,11 @@ namespace _AppCadastroSeries.Classes.Repositories
                 {
                     Functions.WriteError("Informe um gênero valido!\n");
                 }
+                catch (NullReferenceException)
+                {
+                    Functions.WriteError("Opção Inválida!\n");
+                }
+
                 catch (Exception)
                 {
                     Functions.WriteError("Houve um erro ao processar a solicitação!\n");

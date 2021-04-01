@@ -17,7 +17,7 @@ namespace _AppCadastroSeries.Classes.Repositories
             ReturnId(ref _Id);
             try
             {
-                KeepMovies.Add((Movie)AddBase(param, _Id));
+                KeepMovies.Add((Movie)base.AddBase(param, _Id));
                 Console.WriteLine("\nTitulo cadastrado com sucesso!\n");
                 Console.WriteLine("--------------------------------");
             }
@@ -32,7 +32,8 @@ namespace _AppCadastroSeries.Classes.Repositories
             
             if (KeepMovies.Exists(x => x.Id == IdTitle))
             {   
-                Console.WriteLine($"O Titulo '#{IdTitle} - {KeepMovies[IdTitle].Titulo}' foi excluido!\n");
+                Console.WriteLine($"O Titulo '#{IdTitle} - {KeepMovies[IdTitle].Titulo}' foi excluido!");
+                Console.WriteLine("-----------------------------------\n");
                 KeepMovies[IdTitle].Excluded = true;
             }
             else
@@ -41,15 +42,13 @@ namespace _AppCadastroSeries.Classes.Repositories
             }
             
         }
-        
         public void UpdateFromList(int SelectedId)
         {
-            Types newTypeTitle = KeepMovies.Find(x => x.Id == SelectedId).Types;
             Enum newGenTitle = KeepMovies.Find(x => x.Id == SelectedId).Genero;
             var newNameTitle = KeepMovies.Find(x => x.Id == SelectedId).Titulo;
             var newYearTitle = KeepMovies.Find(x => x.Id == SelectedId).Ano;
 
-            UpdateBase(ref newTypeTitle, ref newGenTitle,
+            base.UpdateBase(ref newGenTitle,
                         ref newNameTitle, ref newYearTitle); 
 
             try 
@@ -57,12 +56,11 @@ namespace _AppCadastroSeries.Classes.Repositories
                 if (PassInformation)
                 {
                     var UpdateCtrl = KeepMovies.FirstOrDefault(x => x.Id == SelectedId);
-                    UpdateCtrl.Types = newTypeTitle;
                     UpdateCtrl.Genero = newGenTitle;
                     UpdateCtrl.Titulo = newNameTitle;
                     UpdateCtrl.Ano = newYearTitle;
                     System.Threading.Thread.Sleep(10);
-                    Console.WriteLine("Titulo atualizado com sucesso!\n");
+                    Console.WriteLine("\nTitulo atualizado com sucesso!");
                     Console.WriteLine("------------------------------");
                 }
             }
@@ -72,7 +70,6 @@ namespace _AppCadastroSeries.Classes.Repositories
             }
 
         } 
-
         private void ReturnId(ref int id)
         {
             if (KeepMovies.Count == 0)

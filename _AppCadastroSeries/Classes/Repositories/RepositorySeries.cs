@@ -16,10 +16,9 @@ namespace _AppCadastroSeries.Classes.Repositories
         {
             int _Id = 0;
             ReturnId(ref _Id);
-            AddBase(param, _Id);
             try
             {
-                KeepSeries.Add((Serie)AddBase(param, _Id));
+                KeepSeries.Add((Serie)base.AddBase(param, _Id));
                 Console.WriteLine("\nTitulo cadastrado com sucesso!\n");
                 Console.WriteLine("--------------------------------");
             }
@@ -35,9 +34,24 @@ namespace _AppCadastroSeries.Classes.Repositories
             
             if (KeepSeries.Exists(x => x.Id == IdTitle))
             {
-                
-                Console.WriteLine($"O Titulo '#{IdTitle} - {KeepSeries[IdTitle].Titulo}' foi excluido!\n");
-                KeepSeries[IdTitle].Excluded = true;
+                try 
+                {
+                    if (KeepSeries[IdTitle].Excluded is true)
+                    {
+                        Functions.WriteError("O Id informado não existe!\n");
+                    }
+                    else
+                    {
+                        KeepSeries[IdTitle].Excluded = true;
+                        Console.WriteLine($"O Titulo '#{IdTitle} - {KeepSeries[IdTitle].Titulo}' foi excluido!");
+                        Console.WriteLine("-----------------------------------\n");
+                    }
+                    
+                }
+                catch (Exception)
+                {
+                    Functions.WriteError("Erro ao excluir Titulo!\n");
+                }
             }
             else
             {
@@ -45,15 +59,13 @@ namespace _AppCadastroSeries.Classes.Repositories
             }
             
         }
-        
         public void UpdateFromList(int SelectedId)
         {
-            Types newTypeTitle = KeepSeries.Find(x => x.Id == SelectedId).Types;
             Enum newGenTitle = KeepSeries.Find(x => x.Id == SelectedId).Genero;
             var newNameTitle = KeepSeries.Find(x => x.Id == SelectedId).Titulo;
             var newYearTitle = KeepSeries.Find(x => x.Id == SelectedId).Ano;
 
-            UpdateBase(ref newTypeTitle, ref newGenTitle,
+            base.UpdateBase(ref newGenTitle,
                         ref newNameTitle, ref newYearTitle);    
 
             try 
@@ -61,7 +73,6 @@ namespace _AppCadastroSeries.Classes.Repositories
                 if (PassInformation)
                 {
                     var UpdateCtrl = KeepSeries.FirstOrDefault(x => x.Id == SelectedId);
-                    UpdateCtrl.Types = newTypeTitle;
                     UpdateCtrl.Genero = newGenTitle;
                     UpdateCtrl.Titulo = newNameTitle;
                     UpdateCtrl.Ano = newYearTitle;

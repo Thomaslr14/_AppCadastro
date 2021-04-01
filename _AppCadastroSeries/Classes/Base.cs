@@ -26,11 +26,20 @@ namespace _AppCadastroSeries.Classes
             Console.WriteLine("-----------------\n");
             Console.WriteLine("1 - SERIES\n2 - FILMES");
             var ctrl = Convert.ToInt32(Console.ReadLine());
-            List(ctrl);
-            Console.WriteLine("\nInforme o Id do titulo que deseja excluir:");
-            var IdTitle = Console.ReadLine();
-            switch(ctrl)
+            try 
             {
+                bool IsEmpty = false;
+                IsEmpty = List(ctrl);
+                if (IsEmpty)
+                {
+                    throw new Exception();
+                }
+                
+                Console.WriteLine("\nInforme o Id do titulo que deseja excluir:");
+                var IdTitle = Console.ReadLine();
+            
+                switch(ctrl)
+                {
                 case 1:
                     RepositorySeries repositorySerie = new RepositorySeries();
                     repositorySerie.DelFromList(Convert.ToInt32(IdTitle));
@@ -40,23 +49,61 @@ namespace _AppCadastroSeries.Classes
                     RepositoryMovies repositoryMovie = new RepositoryMovies();
                     repositoryMovie.DelFromList(Convert.ToInt32(IdTitle));
                 break;
+
+                default:
+                    throw new ArgumentNullException();
+                
+                }
             }
+            catch (ArgumentNullException)
+            {
+                Functions.WriteError("Informe uma opção valida!\n");
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            
         }
-        public int[] Update()
+        public void Update(out int SelectedOption, out int SelectedId)
         {
+            SelectedOption = 0;
+            SelectedId = 0;
             Console.Clear();
             Console.WriteLine("-----------------");
             Console.WriteLine("ATUALIZAR TITULOS:");
             Console.WriteLine("-----------------\n");
             Console.WriteLine("1 - SERIES\n2 - FILMES");
             var opt = Console.ReadLine();
-            List(Convert.ToInt32(opt));
-            Console.WriteLine("Selecione um título para atualizar:");
-            var id = Console.ReadLine();
-            int[] arrInt = new int[2];
-            arrInt[0] = Convert.ToInt32(opt);
-            arrInt[1] = Convert.ToInt32(id);
-            return arrInt;
+            try
+            {   
+                bool IsEmpty = false;
+                IsEmpty = List(Convert.ToInt32(opt));
+                if (IsEmpty)
+                {
+                    throw new Exception();
+                }
+                else
+                {
+                    Console.WriteLine("Selecione um título para atualizar:");
+                    var id = Console.ReadLine();
+                    SelectedOption = Convert.ToInt32(opt);
+                    SelectedId = Convert.ToInt32(id);
+                }
+            }
+            catch(NullReferenceException)
+            {
+                return;
+            }
+            catch (FormatException)
+            {
+                Functions.WriteError("Informe uma opção valida!\n");
+                return;
+            }
+            catch (Exception)
+            {
+                return;
+            }
         }
         public string[] Create()
         {
@@ -152,15 +199,23 @@ namespace _AppCadastroSeries.Classes
             
             return arr;
         }
-        public void List(int ctrl)
+        public bool List(int ctrl)
         {
             try 
             {
                 if (ctrl == 1)
                 {
-                    if (RepositorySeries.KeepSeries.Capacity == 0)
+                    int count = 0;
+                    for (int i = 0; i < RepositorySeries.KeepSeries.Count; i++)
                     {
-                        Console.WriteLine("Nenhuma serie cadastrada!\n");
+                        
+                        if (RepositorySeries.KeepSeries[i]._Excluded == true)
+                            count = count + 1;
+                    }
+                    if (count == RepositorySeries.KeepSeries.Count)
+                    {
+                        Functions.WriteError("Nenhuma serie cadastrada!");
+                        return true;
                     }
                     else 
                     {
@@ -171,14 +226,23 @@ namespace _AppCadastroSeries.Classes
                                 Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
                         }
                         Console.WriteLine("--------------------------------------------------------------------------------------------------\n");
+                        return false;
                     }
                     
                 }
                 else if (ctrl == 2)
                 {
-                    if (RepositoryMovies.KeepMovies.Capacity == 0)
+                    int count = 0;
+                    for (int i = 0; i < RepositoryMovies.KeepMovies.Count; i++)
                     {
-                        Console.WriteLine("Nenhuma filme cadastrado!\n");
+                        
+                        if (RepositoryMovies.KeepMovies[i]._Excluded == true)
+                            count = count + 1;
+                    }
+                    if (count == RepositoryMovies.KeepMovies.Count)
+                    {
+                        Functions.WriteError("Nenhuma serie cadastrada!");
+                        return true;
                     }
                     else 
                     {
@@ -189,8 +253,8 @@ namespace _AppCadastroSeries.Classes
                                 Console.WriteLine($"#{item.Id} | {item.Types} | GENERO: {item.Genero} | TITULO: {item.Titulo} | DATA DE LANÇAMENTO: {item.Ano}\n");
                         }
                         Console.WriteLine("--------------------------------------------------------------------------------------------------\n");
+                        return false;
                     }
-
                 }
                 else
                 {
@@ -200,7 +264,7 @@ namespace _AppCadastroSeries.Classes
             catch (ArgumentOutOfRangeException)
             {
                 Functions.WriteError("Informe uma opção valida!\n");
-                return;
+                return true;
             }
             
         }

@@ -51,26 +51,24 @@ namespace _AppCadastroSeries.Classes
         public static void UpdateTitle()
         {
             Catalog catalog = new Catalog();
-            int[] param = new int[2];
-            param = catalog.Update();
-            var SelectedType = param[0];
-            var SelectedId = param[1];
-
-            if (SelectedType == 1)
+            int SelectedOption;
+            int SelectedId;
+            catalog.Update(out SelectedOption, out SelectedId);
+            if (SelectedOption == 1)
             {
                 RepositorySeries repositorySeries = new RepositorySeries();
-                repositorySeries.UpdateFromList(SelectedId);
+                repositorySeries.UpdateFromList(SelectedOption);
 
-                
             }
-            else if (SelectedType == 2)
+            else if (SelectedOption == 2)
             {
                 RepositoryMovies repositoryMovies = new RepositoryMovies();
-                repositoryMovies.UpdateFromList(SelectedId);
+                repositoryMovies.UpdateFromList(SelectedOption);
             }
             else 
             {
-                Functions.WriteError("Erro! O sistema não pôde encontrar a opção informada!");
+                return;
+                //Functions.WriteError("Erro! O sistema não pôde encontrar a opção informada!\n");
             }
             
         }
