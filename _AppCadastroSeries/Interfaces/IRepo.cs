@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 
 namespace _AppCadastroSeries.Interfaces
 {

@@ -32,7 +32,6 @@ namespace _AppCadastroSeries.Classes.Repositories
                 throw new Exception();
             }
         }
-
         protected void UpdateBase(ref Enum newGenTitle,
                                   ref string newNameTitle,
                                   ref string newYearTitle)
@@ -48,7 +47,7 @@ namespace _AppCadastroSeries.Classes.Repositories
                 Console.WriteLine("2 - NOME DO TITULO");
                 Console.WriteLine("3 - ANO DE LANÇAMENTO");
                 Console.WriteLine("S - SALVAR");
-                Console.WriteLine("X - SAIR");
+                Console.WriteLine("X - VOLTAR AO MENU PRINCIPAL");
                 Console.WriteLine("Informe o que deseja atualizar:");
                 option = Console.ReadLine();
                 try
@@ -79,7 +78,7 @@ namespace _AppCadastroSeries.Classes.Repositories
                                 throw new ArgumentOutOfRangeException(); 
                         }
                         else
-                            throw new NullReferenceException(); 
+                            throw new ArgumentNullException(); 
                             
                     break;
 
@@ -90,7 +89,7 @@ namespace _AppCadastroSeries.Classes.Repositories
                         if (!string.IsNullOrEmpty(temp))
                             newNameTitle = temp;
                         else
-                            throw new ArgumentNullException();
+                            Functions.WriteError("O nome não pode ficar em branco!\n");
                     break;
 
                     case "3":
@@ -100,16 +99,14 @@ namespace _AppCadastroSeries.Classes.Repositories
                         if (Functions.CheckYear(temp))
                             newYearTitle = temp;
                         else
-                            throw new ArgumentNullException();
+                            Functions.WriteError("Informe um ano valido!\n");
                     break;
 
                     case "S":
                         PassInformation = true;
                         return;
 
-
                     case "X":
-                        
                     break;
                     
 
@@ -126,11 +123,6 @@ namespace _AppCadastroSeries.Classes.Repositories
                 {
                     Functions.WriteError("Informe um gênero valido!\n");
                 }
-                catch (NullReferenceException)
-                {
-                    Functions.WriteError("Opção Inválida!\n");
-                }
-
                 catch (Exception)
                 {
                     Functions.WriteError("Houve um erro ao processar a solicitação!\n");

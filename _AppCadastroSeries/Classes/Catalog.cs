@@ -1,7 +1,6 @@
 using System;
 using _AppCadastroSeries.Classes.Repositories;
 using _AppCadastroSeries.Classes.OtherFunctions;
-using _AppCadastroSeries.Enums;
 
 
 namespace _AppCadastroSeries.Classes
@@ -57,18 +56,17 @@ namespace _AppCadastroSeries.Classes
             if (SelectedOption == 1)
             {
                 RepositorySeries repositorySeries = new RepositorySeries();
-                repositorySeries.UpdateFromList(SelectedOption);
+                repositorySeries.UpdateFromList(SelectedId);
 
             }
             else if (SelectedOption == 2)
             {
                 RepositoryMovies repositoryMovies = new RepositoryMovies();
-                repositoryMovies.UpdateFromList(SelectedOption);
+                repositoryMovies.UpdateFromList(SelectedId);
             }
             else 
             {
                 return;
-                //Functions.WriteError("Erro! O sistema não pôde encontrar a opção informada!\n");
             }
             
         }

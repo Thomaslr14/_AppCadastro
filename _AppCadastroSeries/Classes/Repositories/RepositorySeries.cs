@@ -3,8 +3,6 @@ using System.Linq;
 using System.Collections.Generic;
 using _AppCadastroSeries.Classes.OtherFunctions;
 using _AppCadastroSeries.Interfaces;
-using _AppCadastroSeries.Enums;
-
 
 namespace _AppCadastroSeries.Classes.Repositories
 {
@@ -61,15 +59,20 @@ namespace _AppCadastroSeries.Classes.Repositories
         }
         public void UpdateFromList(int SelectedId)
         {
-            Enum newGenTitle = KeepSeries.Find(x => x.Id == SelectedId).Genero;
-            var newNameTitle = KeepSeries.Find(x => x.Id == SelectedId).Titulo;
-            var newYearTitle = KeepSeries.Find(x => x.Id == SelectedId).Ano;
-
-            base.UpdateBase(ref newGenTitle,
-                        ref newNameTitle, ref newYearTitle);    
-
             try 
             {
+                if (KeepSeries.Find(x => x.Id == SelectedId).Excluded)
+                {
+                    throw new NullReferenceException();
+                }
+                Enum newGenTitle = KeepSeries.Find(x => x.Id == SelectedId).Genero;
+                var newNameTitle = KeepSeries.Find(x => x.Id == SelectedId).Titulo;
+                var newYearTitle = KeepSeries.Find(x => x.Id == SelectedId).Ano;
+
+                base.UpdateBase(ref newGenTitle,
+                            ref newNameTitle, ref newYearTitle);    
+
+            
                 if (PassInformation)
                 {
                     var UpdateCtrl = KeepSeries.FirstOrDefault(x => x.Id == SelectedId);
@@ -80,6 +83,10 @@ namespace _AppCadastroSeries.Classes.Repositories
                     Console.WriteLine("\nTitulo atualizado com sucesso!");
                     Console.WriteLine("------------------------------");
                 }
+            }
+            catch (NullReferenceException)
+            {
+                Functions.WriteError("O Id informado não existe!\n");
             }
             catch (ArgumentException)
             {

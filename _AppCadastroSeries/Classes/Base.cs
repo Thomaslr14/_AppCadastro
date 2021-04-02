@@ -25,9 +25,10 @@ namespace _AppCadastroSeries.Classes
             Console.WriteLine("EXCLUIR TITULOS:");
             Console.WriteLine("-----------------\n");
             Console.WriteLine("1 - SERIES\n2 - FILMES");
-            var ctrl = Convert.ToInt32(Console.ReadLine());
             try 
             {
+                var ctrl = Convert.ToInt32(Console.ReadLine());
+            
                 bool IsEmpty = false;
                 IsEmpty = List(ctrl);
                 if (IsEmpty)
@@ -56,6 +57,10 @@ namespace _AppCadastroSeries.Classes
                 }
             }
             catch (ArgumentNullException)
+            {
+                Functions.WriteError("Informe uma opção valida!\n");
+            }
+            catch(FormatException)
             {
                 Functions.WriteError("Informe uma opção valida!\n");
             }
@@ -178,8 +183,21 @@ namespace _AppCadastroSeries.Classes
                     }
                     
                 }
-                Console.WriteLine("Informe o nome do Titulo:");
-                arr[2] = Console.ReadLine();
+                bool controlString = true;
+                do 
+                {
+                    Console.WriteLine("Informe o nome do Titulo:");
+                    var temp = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(temp))
+                        Functions.WriteError("O nome do Titulo não pode ficar em branco!\n");
+                    else
+                    {   
+                        arr[2] = temp;
+                        controlString = false;
+                    }   
+                } while (controlString);
+                
+                    
 
                 while (arr[3] == null)
                 {
@@ -241,7 +259,7 @@ namespace _AppCadastroSeries.Classes
                     }
                     if (count == RepositoryMovies.KeepMovies.Count)
                     {
-                        Functions.WriteError("Nenhuma serie cadastrada!");
+                        Functions.WriteError("Nenhum filme cadastrado!");
                         return true;
                     }
                     else 

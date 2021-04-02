@@ -1,6 +1,5 @@
 using System;
 using System.Text.RegularExpressions;
-using _AppCadastroSeries.Enums;
 
 namespace _AppCadastroSeries.Classes.OtherFunctions
 {

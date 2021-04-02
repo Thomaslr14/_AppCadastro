@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using _AppCadastroSeries.Classes.OtherFunctions;
-using _AppCadastroSeries.Enums;
 using _AppCadastroSeries.Interfaces;
 using System.Linq;
 
@@ -10,7 +9,6 @@ namespace _AppCadastroSeries.Classes.Repositories
     public class RepositoryMovies : RepositoryBase, IPattern
     {
         public static List<Movie> KeepMovies = new List<Movie>();        
-
         public void AddToList(string[] param)
         {
             int _Id = 0;
@@ -31,10 +29,25 @@ namespace _AppCadastroSeries.Classes.Repositories
         {
             
             if (KeepMovies.Exists(x => x.Id == IdTitle))
-            {   
-                Console.WriteLine($"O Titulo '#{IdTitle} - {KeepMovies[IdTitle].Titulo}' foi excluido!");
-                Console.WriteLine("-----------------------------------\n");
-                KeepMovies[IdTitle].Excluded = true;
+            {
+                try 
+                {
+                    if (KeepMovies[IdTitle].Excluded is true)
+                    {
+                        Functions.WriteError("O Id informado não existe!\n");
+                    }
+                    else
+                    {
+                        KeepMovies[IdTitle].Excluded = true;
+                        Console.WriteLine($"O Titulo '#{IdTitle} - {KeepMovies[IdTitle].Titulo}' foi excluido!");
+                        Console.WriteLine("-----------------------------------\n");
+                    }
+                    
+                }
+                catch (Exception)
+                {
+                    Functions.WriteError("Erro ao excluir Titulo!\n");
+                }
             }
             else
             {
@@ -44,15 +57,20 @@ namespace _AppCadastroSeries.Classes.Repositories
         }
         public void UpdateFromList(int SelectedId)
         {
-            Enum newGenTitle = KeepMovies.Find(x => x.Id == SelectedId).Genero;
-            var newNameTitle = KeepMovies.Find(x => x.Id == SelectedId).Titulo;
-            var newYearTitle = KeepMovies.Find(x => x.Id == SelectedId).Ano;
-
-            base.UpdateBase(ref newGenTitle,
-                        ref newNameTitle, ref newYearTitle); 
-
             try 
             {
+                if (KeepMovies.Find(x => x.Id == SelectedId).Excluded)
+                {
+                    throw new NullReferenceException();
+                }
+                Enum newGenTitle = KeepMovies.Find(x => x.Id == SelectedId).Genero;
+                var newNameTitle = KeepMovies.Find(x => x.Id == SelectedId).Titulo;
+                var newYearTitle = KeepMovies.Find(x => x.Id == SelectedId).Ano;
+
+                base.UpdateBase(ref newGenTitle,
+                            ref newNameTitle, ref newYearTitle); 
+
+            
                 if (PassInformation)
                 {
                     var UpdateCtrl = KeepMovies.FirstOrDefault(x => x.Id == SelectedId);
@@ -63,6 +81,10 @@ namespace _AppCadastroSeries.Classes.Repositories
                     Console.WriteLine("\nTitulo atualizado com sucesso!");
                     Console.WriteLine("------------------------------");
                 }
+            }
+            catch (NullReferenceException)
+            {
+                Functions.WriteError("O Id informado não existe!\n");
             }
             catch (ArgumentException)
             {

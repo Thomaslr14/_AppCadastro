@@ -1,5 +1,3 @@
-using System;
-using _AppCadastroSeries.Enums;
 
 namespace _AppCadastroSeries.Interfaces
 {
